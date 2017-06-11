@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
+	{% block title_block %}
+
+	{% endblock %}
+
+       	{% block body_block %}
+			<div>
+{% if user.is_authenticated %}
+howdy {{ user.username }}
+{% else %}
+hey there partner!
+{% endif %}
+			{% if categories %}
+			<h3> Most liked Categories </h3>
+			<ul>
+			{% for category in categories %}
+				<li>
+					<a href="/rango/category/{{ category.slug }}">{{ category }}</a>
+				</li>
+			{% endfor %}
+			</ul>
+			{% else %}
+				<strong>There are no categories present.</strong>
+{% endif %}
+			</div>
+			<div>
+
+				{% if pages %}
+			<h3> Most viewed Pages </h3>
+			<ul>
+			{% for page in pages %}
+				<li>
+					<a href="{{  page.url }}" >{{ page }} from Category {{ page.category }} </a>
+				</li>
+			{% endfor %}
+			</ul>
+			{% else %}
+				<strong>There are no pages present.</strong>
+{% endif %}
+{% endblock %}
+				
+			
